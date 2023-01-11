@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content=
+        "width=device-width, initial-scale=1.0">
+  
+    <title>Speech to Text</title>
+</head>
+ 
+<body>
+    <div class="words" contenteditable>
+        <p id="p"></p>
+    </div>
+  
+    <script>
+        var speech = true;
+        window.SpeechRecognition = window.SpeechRecognition
+                        || window.webkitSpeechRecognition;
+  
+        const recognition = new SpeechRecognition();
+        recognition.interimResults = true;
+        const words = document.querySelector('.words');
+        words.appendChild(p);
+  
+        recognition.addEventListener('result', e => {
+            const transcript = Array.from(e.results)
+                .map(result => result[0])
+                .map(result => result.transcript)
+                .join('')
+  
+            document.getElementById("p").innerHTML = transcript;
+            console.log(transcript);
+        });
+          
+        if (speech == true) {
+            recognition.start();
+            recognition.addEventListener('end', recognition.start);
+        }
+
+        
+    </script>
+    <h1>My Web Page</h1>
+
+    <p>Hello everybody!</p>
+    
+    <p>Translate this page:</p>
+    
+    <div id="yo"></div>
+    
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'yo');
+    }
+    </script>
+    
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
+    <p>All rights reserved. No part of this book may be reproduced, stored in a retrieval system, or transmitted in any form or by any means, without the prior written permission of the publisher, except in the case of brief quotations embedded in critical articles or reviews.</p>
+    
+</body>
+  
+</html>
